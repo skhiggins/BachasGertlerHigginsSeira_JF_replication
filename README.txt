@@ -188,7 +188,7 @@ Initially empty folders include a 0-byte `blank.txt` text file so that the folde
 The project root directory contains the following files:
   - `.here` is included to enable R's `here::here()` function to work with relative file paths.
   - `.Rprofile` contains information to install all needed R packages and dependencies.
-	- `LICENSE.md` describes that this repository is licensed under a CC BY 4.0 License, which allows reuse with attribution.
+  - `LICENSE.md` describes that this repository is licensed under a CC BY 4.0 License, which allows reuse with attribution. The license applies to the entirety of this repository _with the exception_ of the files in the `adofiles/` folder listed under ".ado files written by others" above.
   - `README.md` is a markdown README file for the replication package.
   - `README.txt` is identical to `README.md` but included for those unsure how to open an `.md` file.
   - `renv.lock` contains information to install all needed R packages and dependencies.
