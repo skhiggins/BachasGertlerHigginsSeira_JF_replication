@@ -179,7 +179,7 @@ After downloading the replication code and data, unzip it into a folder on your 
   - `graphs` (initially empty) is the folder to which graphs produced by the scripts will be written.
   - `logs` (initially empty) is the folder in which log files will be written.
   - `proc` (initially empty) is the folder in which processed data sets will be saved.
-	- `renv` contains the information needed to install all needed R packages and dependencies.
+  - `renv` contains the information needed to install all needed R packages and dependencies.
   - `scripts` contains the replication code.
   - `tables` (initially empty) is the folder to which tables produced by the scripts will be written.
   - `waste` (initially empty) saves temporary files produced as part of the data preparation.
