@@ -163,8 +163,8 @@ The following list includes the R packages used and the version used; all of the
   - `wrapr` (2.0.2)
   - `metafor` (2.4.0)
   - `lfe` (2.8.5.1)
-	- `colorblindr` (0.1.0)
-	- `colorspace` (1.4.1)
+  - `colorblindr` (0.1.0)
+  - `colorspace` (1.4.1)
   - `renv` (0.12.0)
 
 #### Python 3.8.4
