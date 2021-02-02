@@ -7,18 +7,11 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 108_savings_takeup_graph
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
-
-************
-** LOCALS **
-************
-// Manually set whether to use sample or full data
-local _sample = 0
-if `_sample' local sample "_sample1"
-else local sample ""
 
 **********
 ** DATA **
@@ -55,7 +48,7 @@ graph twoway
 ;
 #delimit cr
 
-graph export "$graphs/proportion_saving`sample'_`time'.pdf", replace
+graph export "$graphs/proportion_saving`sample'_`time'.eps", replace
 
 // SAVINGS RATE CONDITIONAL ON SAVING
 use "$proc/savings_st`sample'.dta", clear // _st is since takeup
@@ -94,7 +87,7 @@ graph twoway
 ;
 #delimit cr
 
-graph export "$graphs/saving_since_takeup`sample'_`time'.pdf", replace
+graph export "$graphs/saving_since_takeup`sample'_`time'.eps", replace
 
 *************
 ** WRAP UP **

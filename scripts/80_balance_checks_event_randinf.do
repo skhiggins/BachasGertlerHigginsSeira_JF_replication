@@ -14,23 +14,19 @@ macro shift // so that `*' has any additional elements
 *****************
 ** DIRECTORIES **
 *****************
-if "`c(username)'"=="higgins" { // NBER server
-	global main "/disk/bulkw/higgins/ATM"
-}
 else if "`c(username)'"=="skh2820" { // Kellogg Linux Cluster
 	global main "/kellogg/proj/skh2820/ATM"
+	global sample ""
 }
-else if "`c(username)'"=="pierrebachas" { // Pierre's laptop
-	global main "/Users/pierrebachas/Dropbox/Bansefi/ATM"
-	local sample "_sample1" // to use 1% sample on laptop
-}	
 else if strpos("`c(username)'","Sean") { // Sean's laptop
 	global main "C:/Dropbox/FinancialInclusion/Bansefi/ATM"
-	local sample "_sample1" // to use 1% sample on laptop
+	global sample "_sample1" // to use 1% sample on laptop
 }
-include "$main/scripts/server_header.doh"
+
 // To replicate on another computer simply uncomment the following lines by removing ** and change the path:
 ** global main "/path/to/replication/folder"
+
+include "$main/scripts/server_header.doh"
 
 *********
 ** LOG **
@@ -38,8 +34,9 @@ include "$main/scripts/server_header.doh"
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 80_balance_checks_event_`start_perm'_`end_perm'
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 

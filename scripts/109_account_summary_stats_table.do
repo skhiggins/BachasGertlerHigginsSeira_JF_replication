@@ -7,11 +7,15 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 109_account_summary_stats_table
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
+************
+** LOCALS **
+************
 // Variables
 local transfer "sum_Op_deposit"
 local depvar "net_savings_ind_0"  
@@ -45,6 +49,9 @@ local titles_list
 
 #delimit cr
 
+**********
+** DATA **
+**********
 use "$proc/bansefi_baseline`sample'.dta", clear
 describe
 

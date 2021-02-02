@@ -170,12 +170,31 @@
       "Repository": "CRAN",
       "Hash": "08cf4045c149a0f0eaf405324c7495bd"
     },
+    "colorblindr": {
+      "Package": "colorblindr",
+      "Version": "0.1.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "colorblindr",
+      "RemoteUsername": "clauswilke",
+      "RemoteRef": "master",
+      "RemoteSha": "e6730be34255e2c38698f5aaf5673b9423db9aa2",
+      "Hash": "044fad661af2a31f2c1b9b2a78fae1a8"
+    },
     "colorspace": {
       "Package": "colorspace",
       "Version": "1.4-1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6b436e95723d1f0e861224dd9b094dfb"
+    },
+    "cowplot": {
+      "Package": "cowplot",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "82bae0172ae9d4c4f88a440ad01f73bb"
     },
     "crayon": {
       "Package": "crayon",
@@ -253,6 +272,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "b31d9e5d051553d1177083aeba04b5b9"
+    },
+    "fastmap": {
+      "Package": "fastmap",
+      "Version": "1.0.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "83ab58a0518afe3d17e41da01af13b60"
     },
     "forcats": {
       "Package": "forcats",
@@ -345,6 +371,13 @@
       "Repository": "CRAN",
       "Hash": "74aa264d2e3b6214529cd33a5850a07f"
     },
+    "httpuv": {
+      "Package": "httpuv",
+      "Version": "1.5.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "f793dad2c9ae14fbb1d22f16f23f8326"
+    },
     "httr": {
       "Package": "httr",
       "Version": "1.4.1",
@@ -372,6 +405,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "73832978c1de350df58108c745ed0e3e"
+    },
+    "later": {
+      "Package": "later",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "6d927978fc658d24175ce37db635f9e5"
     },
     "lattice": {
       "Package": "lattice",
@@ -555,6 +595,13 @@
       "Repository": "CRAN",
       "Hash": "14dc9f7a3c91ebb14ec5bb9208a07061"
     },
+    "promises": {
+      "Package": "promises",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "efbbe62da4709f7040a380c702bc7103"
+    },
     "ps": {
       "Package": "ps",
       "Version": "1.3.0",
@@ -568,6 +615,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "97def703420c8ab10d8f0e6c72101e02"
+    },
+    "rJava": {
+      "Package": "rJava",
+      "Version": "0.9-11",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "5fe07fc151fe8fc7de511f6bd8ecbe19"
     },
     "readr": {
       "Package": "readr",
@@ -673,6 +727,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "6dca4669c2e0e4ac6704b54073bfc3b2"
+    },
+    "shiny": {
+      "Package": "shiny",
+      "Version": "1.4.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a56d058adfc9df30bdd45dbb01cec39f"
+    },
+    "sourcetools": {
+      "Package": "sourcetools",
+      "Version": "0.1.7",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "947e4e02a79effa5d512473e10f41797"
     },
     "stringi": {
       "Package": "stringi",
@@ -785,6 +853,20 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "e9a7e811c14f42f507f0c0a9f425c8a7"
+    },
+    "xlsx": {
+      "Package": "xlsx",
+      "Version": "0.6.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "eff8564afe8e8f69551729e60c39390d"
+    },
+    "xlsxjars": {
+      "Package": "xlsxjars",
+      "Version": "0.6.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "4c4b3bc29a916f33f1298dd951133351"
     },
     "xml2": {
       "Package": "xml2",

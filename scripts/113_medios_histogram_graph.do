@@ -8,7 +8,7 @@ time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 113_medios_histogram_graph
 cap log close
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
@@ -37,7 +37,8 @@ sum months_card, d
 
 tab months_card
 
-replace months_card = 42 if months_card>42 // top code at max value
+assert !missing(months_card)
+replace months_card = 42 if months_card>42 // top code
 #delimit ;
 hist months_card, freq
 	color(gray)

@@ -7,9 +7,10 @@
 *********
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 22_bansefi_nonOp_endbalance
+local sample $sample 
 set linesize 200
 cap log close
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 

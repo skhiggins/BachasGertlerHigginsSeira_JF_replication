@@ -7,15 +7,17 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 119_balance_checks_pos_graph
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
 ************
 ** LOCALS **
 ************
-graph_options, graph_margin(margin(small)) plot_margin(margin(sides))
+graph_options, graph_margin(margin(small)) plot_margin(margin(sides)) ///
+	ylabel_format(format(%3.2f))
 
 local day_window = 7 // how many days around POS transaction
 local outcome "n_day_bc"
@@ -54,7 +56,7 @@ foreach trans_type in POS { // add ATM for relative to ATM transaction
 		;
 		#delimit cr
 
-		graph export "$graphs/`graphname'_`time'.pdf", replace
+		graph export "$graphs/`graphname'_`time'.eps", replace
 	}
 }
 	

@@ -8,8 +8,9 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 107_eventstudy_graph
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
@@ -72,7 +73,7 @@ foreach depvar of local depvars {
 	;
 	#delimit cr	
 
-	graph export "$graphs/`depvar'_event`sample'_`time'.pdf", replace 
+	graph export "$graphs/`depvar'_event`sample'_`time'.eps", replace 
 }
 
 // Graphs for balance checks
@@ -83,7 +84,16 @@ graph_options, labsize(large) ///
 	graph_margin(margin(top_bottom))
 
 foreach depvar of local balance_check_vars {
-	use "$proc/`depvar'`sample'.dta"
+	use "$proc/`depvar'`sample'.dta", clear
+	
+	// Add the omitted period row (last period is omitted)
+	qui count
+	local omitted = r(N) + 1
+	set obs `omitted'
+	summ cuat, meanonly
+	replace cuat = `r(max)' + 1 in `omitted'
+	replace b = 0 in `omitted'
+	replace p = 1 in `omitted'
 	
 	#delimit ;
 	graph twoway 
@@ -108,7 +118,7 @@ foreach depvar of local balance_check_vars {
 	;
 	#delimit cr	
 
-	graph export "$graphs/`depvar'_event`sample'_`time'.pdf", replace
+	graph export "$graphs/`depvar'_event`sample'_`time'.eps", replace
 }
 
 *************

@@ -7,6 +7,7 @@
 *********
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 18_withdrawals_dataprep
+local sample $sample 
 cap log close
 set linesize 200
 log using "$logs/`project'_`time'`sample'.log", text replace

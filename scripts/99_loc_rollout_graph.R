@@ -8,6 +8,7 @@ library(data.table)
 library(dtplyr) # Requires old version 0.0.3; code breaks with 1.0.0
   # Install with remotes::install_version("dtplyr", version = "0.0.3", repos = "http://cran.us.r-project.org")
 library(magrittr)
+library(colorblindr)
 library(here)
 
 # FUNCTIONS
@@ -21,13 +22,14 @@ my_maptheme <- theme(
   legend.position = c(0.8, 0.8), # if on right 
   legend.direction = "horizontal",
   legend.margin = margin(t = 0, r = 0.5, b = 0, l = 0, unit = 'cm'),
-  panel.grid.major = element_line(color = "white")
-  # color = "white" due to geom_sf bug: 
-  #  https://github.com/tidyverse/ggplot2/issues/2389
+  plot.background = element_blank()
 )
 
 # Shape files for municipalities
 states <- list.files(here::here("data", "shapefiles", "INEGI"))
+
+# remove blank.txt 
+states <- states[states != "blank.txt"]
 
 read_shapefiles <- function(state, type) {
   read_sf(dsn = here::here("data", "shapefiles", "INEGI", state), 
@@ -75,11 +77,11 @@ loc_cards <- merge(loc_map, cards_pob_urb %>% as.data.table(), by.x = "CVEGEO", 
 loc_cards %>% nrow() # 259
 
 loc_card_centroids <- loc_cards %>%
-  st_transform(29101) %>% # EPSG:29101 because doesn't work with lat/long; see https://stackoverflow.com/questions/46176660/how-to-calculate-centroid-of-polygon-using-sfst-centroid
+  st_transform(29101) %>% # EPSG:29101 because st_centroid doesn't work with lat/long; see https://stackoverflow.com/questions/46176660/how-to-calculate-centroid-of-polygon-using-sfst-centroid
   st_centroid() %>% 
   st_transform(., '+proj=longlat +ellps=GRS80 +no_defs') # back to lat/long
 
-ggplot() + 
+map_color <- ggplot() + 
   geom_sf(data = state_map, fill = NA, color = "lightgray") + # state outlines
   geom_sf(data = loc_card_centroids, aes(color = bimswitch_frac)) + 
   scale_color_viridis_c(direction = -1, breaks = c(2009, 2010, 2011, 2012)) + 
@@ -91,8 +93,7 @@ ggplot() +
   )) +
   theme_void() +
   my_maptheme
-ggsave(here::here("graphs", "rollout.eps"), width = 8, height = 5)
-  # note the eps and pdf of map take a long time to load since so much info
+ggsave(here::here("graphs", "rollout.eps"), map_color, width = 8, height = 5)
 
-
-
+map_bw <- map_color %>% edit_colors(desaturate)
+ggsave(here::here("graphs", "rollout_bw.eps"), map_bw, width = 8, height = 5) # LOH, not working

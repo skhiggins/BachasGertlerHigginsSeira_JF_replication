@@ -9,7 +9,7 @@ time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 58_locality_dataprep
 cap log close
 set linesize 200
-log using "$logs/`project'_`time'`sample'.log", text replace
+log using "$logs/`project'_`time'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 

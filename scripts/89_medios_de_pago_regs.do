@@ -19,8 +19,6 @@ pwd
 ** Control center
 local randinf = 1 // to do randomization inference
 // Number of permutations
-** if "`sample'" == "_sample1" local N_perm = 100 // laptop
-** else local N_perm = 2000 // server
 local N_perm = 2000
 if c(matsize) < `N_perm' set matsize `N_perm'
 	// "I find no appreciable change in rejection rates beyond 2,000 draws"--Young (2019)

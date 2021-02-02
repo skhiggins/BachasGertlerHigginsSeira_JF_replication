@@ -9,8 +9,9 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 118_nonOportunidades_graph
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
@@ -57,7 +58,7 @@ end
 **********
 ** DATA **
 **********
-use "$proc/nonOp_endbalance.dta", clear 
+use "$proc/nonOp_endbalance`sample'.dta", clear 
 merge m:1 cuenta using "$proc/cuenta_sucursal.dta"
 assert _merge != 1 
 keep if _merge == 3
@@ -75,7 +76,7 @@ label_months month_counter
 
 // Keep the ones opened prior to 2009 since we'll be looking at savings 
 //  over 2009-2011
-merge m:1 cuenta using "$proc/DatosGenerales.dta"
+merge m:1 cuenta using "$proc/DatosGenerales`sample'.dta"
 assert _merge != 1
 uniquevals cuenta if _merge==2
 uniquevals cuenta if _merge==3

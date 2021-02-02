@@ -4,11 +4,12 @@
 *********
 ** LOG **
 *********
-time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
+time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS) 
 local project 09_bansefi_mechanical_effect
+local sample $sample
 cap log close
 set linesize 200
-log using "$logs/`project'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 

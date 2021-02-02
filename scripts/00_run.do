@@ -8,24 +8,19 @@
 *****************
 ** DIRECTORIES **
 *****************
-if "`c(username)'"=="higgins" { // NBER server
-	global main "/disk/bulkw/higgins/ATM"
-}
-else if "`c(username)'"=="skh2820" { // Kellogg Linux Cluster
+if "`c(username)'"=="skh2820" { // Kellogg Linux Cluster
 	global main "/kellogg/proj/skh2820/ATM"
 	global R_path "/software/R/3.6.3/lib64/R/bin/R" // to run R scripts from 00_run.do
 	global Python_path "/software/python/3.8.4/bin/python3" // to run Python scripts from 00_run.do
+	global sample ""
 }
-else if "`c(username)'"=="pierrebachas" { // Pierre's laptop
-	global main "/Users/pierrebachas/Dropbox/Bansefi/ATM"
-	local sample "_sample1" // to use 1% sample on laptop
-}	
-else if strpos("`c(username)'","Sean") { // Sean's laptop
+else if strpos("`c(username)'", "Sean") { // Sean's laptop
 	global main "C:/Dropbox/FinancialInclusion/Bansefi/ATM"
 	global R_path "C:/Dropbox/Programs/R/R-36~1.3/bin/x64/R.exe" // to run R scripts from 00_run.do
 	global Python_path "C:/Dropbox/Python3/python.exe" // to run Python scripts from 00_run.do
-	local sample "_sample1" // to use 1% sample on laptop
+	global sample "_sample1" // to use 1% sample on laptop
 }
+
 // To replicate on another computer simply uncomment the following lines by removing ** and change the path:
 ** global main "/path/to/replication/folder"
 ** global R_path "/path/to/R"
@@ -239,42 +234,42 @@ local 89_medios_de_pago_regs          = 1
 
 // TABLES
 local 90_locality_discrete_time_table = 1 // Table 2
-local 91_encasdu_table                = 1 // Table 3a left panel; Table 7
-local 92_medios_de_pago_table         = 1 // Table 3a right panel; Table B.4
-local 93_encelurb_table               = 1 // Table 3b; Table 5
-local 94_eventstudy_table             = 1 // Table 4; Tables B.2, B.3, B.4, B.5
+local 91_encasdu_table                = 1 // Table 3, Panel A left; Table 7
+local 92_medios_de_pago_table         = 1 // Table 3, Panel A right; Table IA.4
+local 93_encelurb_table               = 1 // Table 3, Panel B; Table 5
+local 94_eventstudy_table             = 1 // Table 4; Tables IA.2, IA.3, IA.4, IA.5
 local 95_encelurb_bycategory_table    = 1 // Table 6
 
 // FIGURES
 local 96_comparison_figure            = 1
 local 97_comparison_figure_graph      = 1 // Figure 1
-local 98_rollout_graph                = 1 // Figure 2a
-local 99_loc_rollout_graph            = 1 // Figure 2b // run on laptop or with sf environment on server
-local 100_enoe_event_graph            = 1 // Figure 3a left panel
-local 101_cpix_event_graph            = 1 // Figure 3a middle panel
-local 102_bdu_allgiro_event_graph     = 1 // Figure 3a right panel
-local 103_cnbv_event_graph            = 1 // Figure 3b
-local 104_bansefi_pre_graph           = 1 // Figure 3c
+local 98_rollout_graph                = 1 // Figure 2, Panel A
+local 99_loc_rollout_graph            = 1 // Figure 2, Panel B // run on laptop or with sf environment on server
+local 100_enoe_event_graph            = 1 // Figure 3, Panel A left
+local 101_cpix_event_graph            = 1 // Figure 3, Panel A middle
+local 102_bdu_allgiro_event_graph     = 1 // Figure 3, Panel A right 
+local 103_cnbv_event_graph            = 1 // Figure 3, Panel B
+local 104_bansefi_pre_graph           = 1 // Figure 3, Panel C
 local 105_ATM_use_graph               = 1 // Figure 4
 local 106_withdrawals_deposits_graph  = 1 // Figure 5
 local 107_eventstudy_graph            = 1 // Figures 6, 8
 local 108_savings_takeup_graph        = 1 // Figure 7
 
 // APPENDIX TABLES
-local 109_account_summary_stats_table = 1 // Table B.1
-local 110_encelurb_heterog_table      = 1 // Table B.6
-local 111_supplyside_table            = 1 // Table B.7
+local 109_account_summary_stats_table = 1 // Table IA.1
+local 110_encelurb_heterog_table      = 1 // Table IA.6
+local 111_supplyside_table            = 1 // Table IA.7
 
 // APPENDIX FIGURES
-local 112_encelurb_histogram_graph    = 1 // Figure B.1a
-local 113_medios_histogram_graph      = 1 // Figure B.1b
-local 114_encasdu_histogram_graph     = 1 // Figure B.1c
-local 115_prospera_event_graph        = 1 // Figure B.2a
-local 116_elections_event_graph       = 1 // Figure B.2b
-local 117_withdrawals_control_graph   = 1 // Figure B.3
-local 118_nonOportunidades_graph      = 1 // Figure B.4
-local 119_balance_checks_pos_graph    = 1 // Figure B.6
-local 120_balance_checks_corr_graph   = 1 // Figure B.7
+local 112_encelurb_histogram_graph    = 1 // Figure IA.1, Panel A
+local 113_medios_histogram_graph      = 1 // Figure IA.1, Panel B
+local 114_encasdu_histogram_graph     = 1 // Figure IA.1, Panel C
+local 115_prospera_event_graph        = 1 // Figure IA.2, Panel A
+local 116_elections_event_graph       = 1 // Figure IA.2, Panel B
+local 117_withdrawals_control_graph   = 1 // Figure IA.3
+local 118_nonOportunidades_graph      = 1 // Figure IA.4
+local 119_balance_checks_pos_graph    = 1 // Figure IA.6
+local 120_balance_checks_corr_graph   = 1 // Figure IA.7
 
 ************************************************************************************
 // BEGINNING OF BANSEFI ADMIN DATA PREP	
@@ -1273,9 +1268,9 @@ if (`91_encasdu_table') do "$scripts/91_encasdu_table.do"
 	**  $tables/encasdu_balance_`time'.tex // Table 3a right panel
 	**  $tables/encasdu_`time'.tex // Table 7
 		
-*************************************
-** TABLE 3a right panel, TABLE B.8 **
-*************************************
+**************************************
+** TABLE 3a right panel, TABLE IA.8 **
+**************************************
 if (`92_medios_de_pago_table') do "$scripts/92_medios_de_pago_table.do"
 	** INPUTS
 	**  "$proc/medios_de_pago_results.dta" // 89_medios_de_pago_regs
@@ -1284,7 +1279,7 @@ if (`92_medios_de_pago_table') do "$scripts/92_medios_de_pago_table.do"
 	**  "$proc/medios_de_pago_balance_pvalues.dta" // 89_medios_de_pago_regs
 	** OUTPUTS
 	**  $tables/medios_de_pago_balance_`time'.tex // Table 3a left panel
-	**  $tables/medios_de_pago_`time'.tex // Table B.8
+	**  $tables/medios_de_pago_`time'.tex // Table IA.8
 	
 ***********************
 ** TABLE 3b, TABLE 5 **
@@ -1297,9 +1292,9 @@ if (`93_encelurb_table') do "$scripts/93_encelurb_table.do"
 	**  $tables/encelurb_parallel_`time'.tex // Table 3b
 	**  $tables/encelurb_`time'.tex // Table 5
 
-****************************************
-** TABLE 4, TABLES B.2, B.3, B.4, B.5 **
-****************************************
+********************************************
+** TABLE 4, TABLES IA.2, IA.3, IA.4, IA.5 **
+********************************************
 if (`94_eventstudy_table') do "$scripts/94_eventstudy_table.do"
 	** INPUTS
 	**  $proc/`depvar'.dta 
@@ -1312,9 +1307,9 @@ if (`94_eventstudy_table') do "$scripts/94_eventstudy_table.do"
 	**  $proc/`depvar'_ri_p.dta // 85_event_randinf_pvalues
 	** OUTPUTS
 	**  $tables/eventstudy_`time'.tex // Table 4
-	**  $tables/`depvar'_`time'.tex // Tables B.2, B.3
-	**  $tables/event_means_`time'.tex // Table B.4
-	**  $tables/savings_since_takeup_`time'.tex // Table B.5
+	**  $tables/`depvar'_`time'.tex // Tables IA.2, IA.3
+	**  $tables/event_means_`time'.tex // Table IA.4
+	**  $tables/savings_since_takeup_`time'.tex // Table IA.5
 
 *************
 ** TABLE 6 **
@@ -1366,6 +1361,7 @@ if (`97_comparison_figure_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 	**  $proc/savings_rates.csv // 96_comparison_figure
 	** OUTPUTS
 	**  here::here("graphs", "comparison_figure.eps") # Figure 1
+	**  here::here("graphs", "comparison_figure_bw.eps") # Figure 1	black and white version for print journal
 	
 **************
 ** FIGURE 2 **
@@ -1376,7 +1372,7 @@ if (`98_rollout_graph') do "$scripts/98_rollout_graph.do"
 	** INPUTS
 	**  $proc/bim_switch_integrante.dta // 06_bansefi_bimswitch
 	** OUTPUTS
-	**  $graphs/timing_bansefi_`lang'`pres'.eps # Figure 2a
+	**  $graphs/timing_bansefi_`lang'`pres'.eps # Figure 2, Panel A
 
 ** PANEL B 
 if (`99_loc_rollout_graph') shell "$R_path" CMD BATCH --vanilla -q ///
@@ -1387,7 +1383,8 @@ if (`99_loc_rollout_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 ** #  State shapefiles: here::here("data", "shapefiles", "INEGI", state), suffix "_entidad"
 ** #  here::here("proc", "cards_pob.rds") # 29_cards_panel
 ** # OUTPUTS
-** #  here::here("graphs", "rollout.eps") # Figure 2b
+** #  here::here("graphs", "rollout.eps") # Figure 2, Panel B
+** #  here::here("graphs", "rollout_bw.eps") # Figure 2b black and white version for print journal
 	
 **************
 ** FIGURE 3 **	
@@ -1399,7 +1396,7 @@ if (`100_enoe_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 	** INPUTS:
 	**  here::here("proc", "enoe_cards_all.rds") // 69_enoe_event_dataprep
 	** OUTPUTS
-	**  # Figure 3a left
+	**  # Figure 3, Panel A left
 
 ** PANEL A2) Log food prices
 if (`101_cpix_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
@@ -1408,7 +1405,7 @@ if (`101_cpix_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
   ** INPUTS
   **  here::here("proc", "cpix_bim.rds") # 72_cpix_event_dataprep
   ** OUTPUTS
-  **  # Figure 3a middle
+  **  # Figure 3, Panel A middle
 
 ** PANEL A3) Log POS terminals
 if (`102_bdu_allgiro_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
@@ -1417,7 +1414,7 @@ if (`102_bdu_allgiro_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 	** INPUTS
 	**  here::here("proc", "bdu_cp_allgiro_forreg.rds") # 45_bdu_allgiro_event_dataprep
 	** OUTPUTS 
-	**  # Figure 3a right
+	**  # Figure 3, Panel A right
 
 ** PANEL B) Municipality-level data from CNBV
 if (`103_cnbv_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
@@ -1426,7 +1423,7 @@ if (`103_cnbv_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 	** INPUTS
 	**  here::here("proc", "cnbv_forreg.rds") # 48_cnbv_event_dataprep
 	** OUTPUTS
-	**  # Figure 3b left, middle, right
+	**  # Figure 3, Panel B left, middle, right
 
 ** PANEL C) Microdata from Bansefi
 if (`104_bansefi_pre_graph') shell "$R_path" CMD BATCH --vanilla -q ///
@@ -1436,7 +1433,7 @@ if (`104_bansefi_pre_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 	**  here::here("proc", "net_savings_ind_0_ln_event.dta") # 82_savings_event
 	**  here::here("proc", "N_withdrawals.dta") # 81_withdrawals_event
 	** OUTPUTS
-	**  # Figure 3c left, middle, right
+	**  # Figure 3, Panel C left, middle, right
 	
 **************
 ** FIGURE 4 **
@@ -1476,8 +1473,8 @@ if (`108_savings_takeup_graph') do "$scripts/108_savings_takeup_graph.do"
 	**  $proc/proportion_saving.dta // 79_savings_takeup
 	**  $proc/savings_st.dta // 79_savings_takeup
 	** OUTPUTS
-	**  $graphs/proportion_saving_`time'.pdf // Figure 7a
-	**  $graphs/saving_since_takeup_`time'.pdf // Figure 7b
+	**  $graphs/proportion_saving_`time'.pdf // Figure 7, Panel A
+	**  $graphs/saving_since_takeup_`time'.pdf // Figure 7, Panel B
 	
 *********************************************************************
 // END FIGURES
@@ -1487,41 +1484,41 @@ if (`108_savings_takeup_graph') do "$scripts/108_savings_takeup_graph.do"
 // BEGIN APPENDIX TABLES
 *********************************************************************	
 
-**************
-** TABLE B1 **
-**************	
+****************
+** TABLE IA.1 **
+****************
 if (`109_account_summary_stats_table') do "$scripts/109_account_summary_stats_table.do"
 	** INPUTS
 	**  $proc/bansefi_baseline.dta // 14_bansefi_baseline
 	** OUTPUTS
-	**  $tables/account_summary_stats.tex // Table B.1
+	**  $tables/account_summary_stats.tex // Table IA.1
 
 ***************************
 ** TABLES B2, B3, B4, B5 **
 ***************************
 ** see above
 
-**************
-** TABLE B6 **
-**************
+****************
+** TABLE IA.6 **
+****************
 if (`110_encelurb_heterog_table') do "$scripts/110_encelurb_heterog_table.do"
 	** INPUTS
 	**  $proc/encel_heterogeneity_totcons.dta // encelurb_heterogeneity
 	** OUTPUTS
-	**  $tables/encel_heterogeneity_totcons_`time'.tex // Table B.6
+	**  $tables/encel_heterogeneity_totcons_`time'.tex // Table IA.6
 
-**************
-** TABLE B7 **
-**************
+****************
+** TABLE IA.7 **
+****************
 if (`111_supplyside_table') do "$scripts/111_supplyside_table.do"
 	** INPUTS
 	**  $proc/cnbv_supply.dta // 52_cnbv_supplyside_dataprep
 	** OUTPUTS
-	**  $tables/supplyside_`date'.tex // Table B.7
+	**  $tables/supplyside_`date'.tex // Table IA.7
 
-**************
-** TABLE B8 **
-**************
+****************
+** TABLE IA.8 **
+****************
 ** see above
 
 *********************************************************************
@@ -1532,31 +1529,30 @@ if (`111_supplyside_table') do "$scripts/111_supplyside_table.do"
 // BEGIN APPENDIX FIGURES
 *********************************************************************	
 
-***************
-** FIGURE B1 **
-***************
-** A) HOUSEHOLD PANEL SURVEY
+*****************
+** FIGURE IA.1 **
+*****************
 if (`112_encelurb_histogram_graph') do "$scripts/112_encelurb_histogram_graph.do"
 	** INPUTS 
 	**  $proc/encel_forreg_bycategory.dta // 65_encelurb_bycategory_dataprep
 	** OUTPUTS
-	**  $graphs/hist_encel.eps // Figure B.1a
+	**  $graphs/hist_encel.eps // Figure IA.1, Panel A
 	
 if (`113_medios_histogram_graph') do "$scripts/113_medios_histogram_graph.do"
 	** INPUTS
 	**  $data/Medios_de_Pago/medios_pago_titular_beneficiarios.dta // raw data
 	** OUTPUTS
-	**  $graphs/hist_medios_de_pago.eps // Figure B.1b
+	**  $graphs/hist_medios_de_pago.eps // Figure IA.1, Panel B
 
 if (`114_encasdu_histogram_graph') do "$scripts/114_encasdu_histogram_graph.do"	
 	** INPUTS
 	**  $proc/encasdu_forreg.dta // 74_encasdu_dataprep
 	** OUTPUTS
-	**  $graphs/hist_encasdu.eps // Figure B.1c
+	**  $graphs/hist_encasdu.eps // Figure IA.1, Panel C
 
-***************
-** FIGURE B2 **
-***************
+*****************
+** FIGURE IA.2 **
+*****************
 ** NUMBER OF BENEFICIARIES
 if (`115_prospera_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 	"$scripts/115_prospera_event_graph.R" "$logs/115_prospera_event_graph.log"
@@ -1564,7 +1560,7 @@ if (`115_prospera_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 	** INPUTS
 	**  here::here("proc", "prospera_forreg.rds") # 32_cards_event_dataprep
 	** OUTPUTS
-	**  Figure B.2a
+	**  Figure IA.2, Panel A
 	
 ** POLITICAL PARTY IN POWER
 if (`116_elections_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
@@ -1572,11 +1568,11 @@ if (`116_elections_event_graph') shell "$R_path" CMD BATCH --vanilla -q ///
 ** # INPUTS
 ** #  here::here("proc", "elections_forreg.rds") # 54_elections_event_dataprep
 ** # OUTPUTS
-** #  Figure B.2b
+** #  Figure IA.2, Panel B
 
-***************
-** FIGURE B3 **
-***************
+*****************
+** FIGURE IA.3 **
+*****************
 if (`117_withdrawals_control_graph') do "$scripts/117_withdrawals_control_graph.do"
 	** Number of withdrawals over calendar time in the control group
 	** INPUTS
@@ -1585,11 +1581,11 @@ if (`117_withdrawals_control_graph') do "$scripts/117_withdrawals_control_graph.
 	**  $proc/integrante_sucursal.dta // 05_bansefi_sucursales_dataprep
 	**  $proc/branch_loc.dta // 13_branches_localities
 	** OUTPUTS
-	**  $graphs/timeline_withdrawals_control`sample'_`time'.eps // Figure B.3
+	**  $graphs/timeline_withdrawals_control`sample'_`time'.eps // Figure IA.3
 
-***************
-** FIGURE B4 **
-***************
+*****************
+** FIGURE IA.4 **
+*****************
 if (`118_nonOportunidades_graph') do "$scripts/118_nonOportunidades_graph.do"
 	** Savings among non-beneficiaries
 	** INPUTS
@@ -1598,33 +1594,33 @@ if (`118_nonOportunidades_graph') do "$scripts/118_nonOportunidades_graph.do"
 	**  $proc/DatosGenerales.dta // 02_bansefi_generales_dataprep
 	**  $proc/branch_loc.dta // 13_branches_localities
 	** OUTPUTS
-	**  $graphs/nonOportunidades_saving_`time'.eps
+	**  $graphs/nonOportunidades_saving_`time'.eps // Figure IA.4
 
-***************
-** FIGURE B5 **
-***************
+*****************
+** FIGURE IA.5 **
+*****************
 ** Stylistic illustration done in Tikz
 
-***************
-** FIGURE B6 **
-***************
+*****************
+** FIGURE IA.6 **
+*****************
 if (`119_balance_checks_pos_graph') do "$scripts/119_balance_checks_pos_graph.do"
 	** Number of balance checks within 7 days
 	** INPUTS
 	**  $proc/n_day_bc_POS_means.dta // 84_balance_checks_pos_event
 	** OUTPUTS
-	**  $graphs/n_day_bc_POS_means_`time'.pdf // Figure B.6
+	**  $graphs/n_day_bc_POS_means_`time'.pdf // Figure IA.6
 
-***************
-** FIGURE B7 **
-***************
+*****************
+** FIGURE IA.7 **
+*****************
 if (`120_balance_checks_corr_graph') do "$scripts/120_balance_checks_corr_graph.do"
 	** Within account correlation between balance checks and savings
 	** INPUTS	
 	**  $proc/balance_checks_forreg.dta // 16_balance_checks_dataprep
 	**  $proc/netsavings_forreg.dta // 20_savings_event_dataprep
 	** OUTPUTS
-	**  $graphs/`var'_corr_`time'`sample'.eps // Figure B.7
+	**  $graphs/`var'_corr_`time'`sample'.eps // Figure IA.7
 
 *********************************************************************
 // END APPENDIX FIGURES

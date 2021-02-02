@@ -9,7 +9,7 @@ time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 50_cnbv_bd_sucursales
 set linesize 200
 cap log close
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
@@ -120,7 +120,6 @@ foreach var in numsuc numcajaut {
 	matlist results
 
 	save "$proc/bd_``var'_rename'_month.dta", replace
-	
 	
 } // end loop over `var' (branches and ATMs)
 

@@ -8,8 +8,9 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 117_withdrawals_control_graph
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
@@ -223,6 +224,7 @@ label values bimester_redefined bimester_redefined
 graph_options, labsize(large) ///
 	plot_margin(margin(sides)) ///
 	graph_margin(margin(t=3)) ///
+	ylabel_format(format(%2.1f)) ///
 	x_angle(angle(vertical)) ///
 	title_options(margin(b=2 t=0 l=0 r=0) color(black) span)
 

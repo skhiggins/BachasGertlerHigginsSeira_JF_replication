@@ -19,6 +19,8 @@ pwd
 ************
 ** LOCALS **
 ************
+local sample $sample
+
 // Control center
 local make_sample = 1 // 1 to make 1% sample at end, 0 otherwise
 local startyear = 2007
@@ -70,7 +72,7 @@ save `tomerge', replace
 // Load in transactions data, assign 0s for accounts with no transaction in a particular bimester
 forval year=`startyear'/`endyear' {
 	noisily mydi "`year'", s(4)
-	use $proc/MOV`year'`sample', clear
+	use "$proc/MOV`year'`sample'.dta", clear
 	drop if cod_tx=="LIQ11OBB" // interest payments (drop so we don't count them as deposits)
 	gen date = date(fecha_contable, "YMD")
 	assert !missing(date) 

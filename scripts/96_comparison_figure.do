@@ -10,7 +10,7 @@ time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 96_comparison_figure
 cap log close
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
@@ -101,9 +101,9 @@ foreach var of varlist article year extra {
 
 // Create a metadata variable with author, year, and any extra info
 gen AuthorYear = article
-replace AuthorYear = article + ", " + year if !mi(year) & mi(extra)
+replace AuthorYear = article + " (" + year + ")" if !mi(year) & mi(extra)
 replace AuthorYear = article + " (" + extra + ")" if mi(year) & !mi(extra)
-replace AuthorYear = article + ", " + year + " (" + extra + ")" ///
+replace AuthorYear = article + " (" + year + ")" + " (" + extra + ")" ///
 	if !mi(year) & !mi(extra)
 tempfile tomerge 
 save `tomerge', replace
@@ -852,7 +852,7 @@ clear
 svmat2 savingsrates, names(col) rnames(auth) // !user! written by Nick Cox
 	// (unlike -svmat-, allows row names to be saved as variable)
 gen byte ours = 0
-replace ours = 1 if strpos(auth,"thispaper")
+replace ours = 1 if strpos(auth, "thispaper")
 drop if mi(b) // extra rows
 
 // For creating a forest plot in R:

@@ -6,6 +6,7 @@
 *********
 time
 local project 11_bansefi_balance_checks
+local sample $sample 
 cap log close
 set linesize 200
 log using "$logs/`project'_`time'`sample'.log", text replace
@@ -136,11 +137,8 @@ drop max_with
 *************************
 // Gen time from deposit 
 *************************
-
 // Gen deposit
 rename is_op_deposit deposit
-// gen deposit = 0
-// replace deposit =1 if balance_check == 0 & naturaleza == "H" & importe>=300
 
 by integranteid: gen cum_deposit = sum(deposit)
 

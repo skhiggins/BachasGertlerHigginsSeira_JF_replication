@@ -6,6 +6,7 @@
 *********
 time
 local project 15_ATM_use_dataprep
+local sample $sample 
 cap log close
 set linesize 200
 log using "$logs/`project'_`time'`sample'.log", text replace

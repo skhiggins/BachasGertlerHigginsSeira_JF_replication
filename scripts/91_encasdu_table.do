@@ -22,8 +22,6 @@ local write   = 1
 local balance_test = 1
 local randinf = 1 // to do randomization inference
 // Number of permutations
-** if "`sample'" == "_sample1" local N_perm = 100 // laptop
-** else local N_perm = 2000 // server
 local N_perm 2000
 	// "I find no appreciable change in rejection rates beyond 2,000 draws"--Young (2019)
 local seed 61084137 // from random.org

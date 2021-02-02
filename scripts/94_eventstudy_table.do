@@ -6,19 +6,15 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 94_eventstudy_table
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
 ************
 ** LOCALS **
 ************
-// Manually set whether to use sample results or full data 
-local _sample = 0
-if `_sample' local sample "_sample1"
-else local sample ""
-
 #delimit ;
 local depvars /* for the main table in paper */
 	N_withdrawals 

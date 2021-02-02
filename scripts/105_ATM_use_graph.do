@@ -7,8 +7,9 @@
 time // saves locals `date' (YYYYMMDD) and `time' (YYYYMMDD_HHMMSS)
 local project 105_ATM_use_graph
 cap log close
+local sample $sample 
 set linesize 200
-log using "$logs/`project'`sample'_`time'.log", text replace
+log using "$logs/`project'_`time'`sample'.log", text replace
 di "`c(current_date)' `c(current_time)'"
 pwd
 
@@ -21,11 +22,6 @@ graph_options, labsize(large) ///
 	x_labgap(labgap(3)) y_labgap(labgap(1)) ///
 	plot_margin(margin(sides)) ///
 	graph_margin(margin(top_bottom))
-	
-// Manually control whether to run on sample results or full
-local _sample 0
-if `_sample' local sample "_sample1"
-else local sample ""
 
 **********
 ** DATA **
@@ -57,7 +53,7 @@ foreach outcome in used_ATM { // add used_POS to see POS transaction behavior
 
 	#delimit cr
 
-	foreach ftype in pdf {
+	foreach ftype in eps {
 		graph export "$graphs/`outcome'_event`sample'_`time'.`ftype'", replace
 	}
 }
