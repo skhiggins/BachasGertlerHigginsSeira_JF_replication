@@ -163,7 +163,10 @@ The following list includes the R packages used and the version used; all of the
   - `wrapr` (2.0.2)
   - `metafor` (2.4.0)
   - `lfe` (2.8.5.1)
-  - `colorblindr` (0.1.0)
+  - `colorblindr` (0.1.0) Note: not available on CRAN. To install, if not using `renv` to install the full set of packages needed for this replication package: 
+    ```r
+    remotes::install_github("clauswilke/colorblindr")
+    ```
   - `colorspace` (1.4.1)
   - `renv` (0.12.0)
 
