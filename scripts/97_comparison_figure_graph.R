@@ -118,7 +118,7 @@ for (color in c(0, 1)) { # color and black and white versions
   # Panel titles 
   # (http://www.metafor-project.org/doku.php/plots:forest_plot_with_subgroups)
   # par(font=3) # italic
-  text(c.lo - 0.13/2, shorter_end_row + 1.125, "Panel A. Studies with about 1 year duration", cex = 1.2)
+  text(c.lo - 0.13/2, shorter_end_row + 1.125, "Panel A. Studies with approximately one-year duration", cex = 1.2)
   text(c.lo - 0.13/2, longer_end_row + 1.125, "Panel B. Studies with longer duration", cex = 1.2)
   
   # Extra formatting lines requested by copyeditor
@@ -132,5 +132,5 @@ for (color in c(0, 1)) { # color and black and white versions
 
   # Save .eps or .png file
   if (eps==1 | jpg==1) { dev.off() }
-  # add arrows to indicate the clipped confidence interval
+  
 }

@@ -268,7 +268,7 @@ local 115_prospera_event_graph        = 1 // Figure IA.2, Panel A
 local 116_elections_event_graph       = 1 // Figure IA.2, Panel B
 local 117_withdrawals_control_graph   = 1 // Figure IA.3
 local 118_nonOportunidades_graph      = 1 // Figure IA.4
-local 119_balance_checks_pos_graph    = 1 // Figure IA.6
+local 119_balance_checks_pos_graph    = 1 // Figure IA.5
 local 120_balance_checks_corr_graph   = 1 // Figure IA.7
 
 ************************************************************************************
@@ -1599,17 +1599,17 @@ if (`118_nonOportunidades_graph') do "$scripts/118_nonOportunidades_graph.do"
 *****************
 ** FIGURE IA.5 **
 *****************
-** Stylistic illustration done in Tikz
-
-*****************
-** FIGURE IA.6 **
-*****************
 if (`119_balance_checks_pos_graph') do "$scripts/119_balance_checks_pos_graph.do"
 	** Number of balance checks within 7 days
 	** INPUTS
 	**  $proc/n_day_bc_POS_means.dta // 84_balance_checks_pos_event
 	** OUTPUTS
-	**  $graphs/n_day_bc_POS_means_`time'.pdf // Figure IA.6
+	**  $graphs/n_day_bc_POS_means_`time'.pdf // Figure IA.5
+
+*****************
+** FIGURE IA.6 **
+*****************
+** Stylistic illustration done in Tikz
 
 *****************
 ** FIGURE IA.7 **
