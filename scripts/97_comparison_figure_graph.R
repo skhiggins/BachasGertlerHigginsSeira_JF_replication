@@ -117,7 +117,6 @@ for (color in c(0, 1)) { # color and black and white versions
   
   # Panel titles 
   # (http://www.metafor-project.org/doku.php/plots:forest_plot_with_subgroups)
-  # par(font=3) # italic
   text(c.lo - 0.13/2, shorter_end_row + 1.125, "Panel A. Studies with Approximately One-Year Duration", cex = 1.2)
   text(c.lo - 0.13/2, longer_end_row + 1.125, "Panel B. Studies with Longer Duration", cex = 1.2)
   
